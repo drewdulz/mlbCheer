@@ -1,0 +1,122 @@
+{
+	{ 
+		"name": Blue Jays",
+		"color": "#134A8E"
+	},
+	{ 
+		"name": "Rays",
+		"color": "#092C5C" 
+	},
+	{ 
+		"name": "Orioles",
+		"color": "#DF4601" 
+	},
+	{ 
+		"name": "Red Sox",
+		"color": "#BD3039"
+	},
+	{ 
+		"name": "Yankees",
+		"color": "#E4002B"
+	},
+	{ 
+		"name": "Royals",
+		"color": "#004687" 
+	},
+	{ 
+		"name": "Indians",
+		"color": "#E31937" 
+	},
+	{ 
+		"name": "White Sox",
+		"color": "#000000" 
+	},
+	{ 
+		"name": "Tigers",
+		"color": "#0C2C56" 
+	},
+	{ 
+		"name": "Twins",
+		"color": "#002B5C" 
+	},
+	{ 
+		"name": "Mariners",
+		"color": "#0C2C56" 
+	},
+	{ 
+		"name": "Angels",
+		"color": "#BA0021" 
+	},
+	{ 
+		"name": "Athletics",
+		"color": "#003831" 
+	},
+	{ 
+		"name": "Rangers",
+		"color": "#C0111F" 
+	},
+	{ 
+		"name": "Astros",
+		"color": "#002D62" 
+	},
+	{ 
+		"name": "Reds",
+		"color": "#C6011F" 
+	},
+	{ 
+		"name": "Pirates",
+		"color": "#FDB827" 
+	},
+	{ 
+		"name": "Cubs",
+		"color": "#CC3433" 
+	},
+	{ 
+		"name": "Cardinals",
+		"color": "#C41E3A" 
+	},
+	{ 
+		"name": "Brewers",
+		"color": "#0A2351" 
+	},
+	{ 
+		"name": "Dodgers",
+		"color": "#EF3E42" 
+	},
+	{ 
+		"name": "Diamondbacks",
+		"color": "#A71930" 
+	},
+	{ 
+		"name": "Giants",
+		"color": "#FD5A1E" 
+	},
+	{ 
+		"name": "Rockies",
+		"color": "#333366" 
+	},
+	{ 
+		"name": "Padres",
+		"color": "#002D62" 
+	},
+	{ 
+		"name": "Phillies",
+		"color": "#284898" 
+	},
+	{ 
+		"name": "Mets",
+		"color": "#FF5910" 
+	},
+	{ 
+		"name": "Marlins",
+		"color": "#FF6600" 
+	},
+	{ 
+		"name": "Braves",
+		"color": "#CE1141" 
+	},
+	{
+		"name": Nationals",
+		"color": "#AB0003"
+	}
+}
