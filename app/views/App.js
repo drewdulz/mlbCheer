@@ -1,10 +1,11 @@
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View, TouchableOpacity } from 'react-native'
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
-import teamColors from './assets/TeamColours'
+import teamColors from './assets/TeamColours';
+import CheerAnimation from '../components/CheerAnimation'
+import firebase from 'react-native-firebase';
 
-
-import firebase from 'react-native-firebase'
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
   constructor () {
@@ -82,15 +83,7 @@ export default class App extends React.Component {
           <Right />
         </Header>
         <View style={[styles.cheerContainer, { backgroundColor: teamColors[`${this.state.myTeam}`] }]} >
-          { this.cheers.forEach((cheer) => {
-              const cheerText = cheer.value
-              return (
-                <Text>
-                  { cheerText }
-                </Text>
-              )
-            })
-          }
+          <CheerAnimation />
         </View>
       </View>
     )
