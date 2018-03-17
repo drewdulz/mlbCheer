@@ -3,16 +3,24 @@ import { StyleSheet, Platform, Image, Text, View } from 'react-native';
 
 import firebase from 'react-native-firebase';
 
+
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
       // firebase things?
     };
-  }
 
-  componentDidMount() {
-    // firebase things?
+    const firebaseConfig = {
+      apiKey: "AIzaSyBe9UgbH9_0vS-vxPAk7C1VSLBE881fv4Y",
+      authDomain: "mlb-hackday.firebaseapp.com",
+      databaseURL: "https://mlb-hackday.firebaseio.com",
+      projectId: "mlb-hackday",
+      storageBucket: "mlb-hackday.appspot.com",
+      messagingSenderId: "956022020319"
+    };
+
+    firebase.initializeApp(firebaseConfig);
   }
 
   render() {
