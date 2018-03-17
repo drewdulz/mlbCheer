@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Platform, Image, Text, View } from 'react-native';
+import { StyleSheet, Platform, Image, Text, View, Button } from 'react-native';
 
 import firebase from 'react-native-firebase';
 
@@ -7,11 +7,27 @@ import firebase from 'react-native-firebase';
 export default class App extends React.Component {
   constructor() {
     super();
+    this.cheersRef = firebase.database().ref('cheers');
+    this.cheers = [];
+  }
 
-    const cheersRef = firebase.database().ref('cheers');
+  componentDidMount() {
+    this.listenForCheers(this.cheersRef);
+  }
 
-    cheersRef.on('value', (snapshot) => {
-      console.log(snapshot.value());
+  listenForCheers(cheersRef) {
+    cheersRef.on('value', (dbSnapshot) => {
+      const cheers = [];
+
+      dbSnapshot.forEach((cheer) => {
+        this.cheers.push({
+          value: cheer.val(),
+        })
+      });
+
+      this.setState({
+        cheers: cheers,
+      });
     }, (errorObj) => {
       console.log(`Error occured for ${errorObj.code}`);
     });
@@ -20,38 +36,17 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require('./assets/RNFirebase512x512.png')} style={[styles.logo]} />
-        <Text style={styles.welcome}>
-          Welcome to the React Native{'\n'}Firebase starter project!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        {Platform.OS === 'ios' ? (
-          <Text style={styles.instructions}>
-            Press Cmd+R to reload,{'\n'}
-            Cmd+D or shake for dev menu
-          </Text>
-        ) : (
-          <Text style={styles.instructions}>
-            Double tap R on your keyboard to reload,{'\n'}
-            Cmd+M or shake for dev menu
-          </Text>
-        )}
-        <View style={styles.modules}>
-          <Text style={styles.modulesHeader}>The following Firebase modules are enabled:</Text>
-          {firebase.admob.nativeModuleExists && <Text style={styles.module}>Admob</Text>}
-          {firebase.analytics.nativeModuleExists && <Text style={styles.module}>Analytics</Text>}
-          {firebase.auth.nativeModuleExists && <Text style={styles.module}>Authentication</Text>}
-          {firebase.fabric.crashlytics.nativeModuleExists && <Text style={styles.module}>Crashlytics</Text>}
-          {firebase.crash.nativeModuleExists && <Text style={styles.module}>Crash Reporting</Text>}
-          {firebase.firestore.nativeModuleExists && <Text style={styles.module}>Cloud Firestore</Text>}
-          {firebase.messaging.nativeModuleExists && <Text style={styles.module}>Messaging</Text>}
-          {firebase.perf.nativeModuleExists && <Text style={styles.module}>Performance Monitoring</Text>}
-          {firebase.database.nativeModuleExists && <Text style={styles.module}>Realtime Database</Text>}
-          {firebase.config.nativeModuleExists && <Text style={styles.module}>Remote Config</Text>}
-          {firebase.storage.nativeModuleExists && <Text style={styles.module}>Storage</Text>}
-        </View>
+        {
+          this.cheers.forEach((cheer) => {
+            const cheerText = cheer.value;
+
+            return (
+              <Text>
+                { cheerText }
+              </Text>
+            );
+          })
+        }
       </View>
     );
   }
@@ -78,17 +73,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  },
-  modules: {
-    margin: 20,
-  },
-  modulesHeader: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  module: {
-    fontSize: 14,
-    marginTop: 4,
-    textAlign: 'center',
   }
 });
