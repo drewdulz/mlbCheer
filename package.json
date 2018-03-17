@@ -24,6 +24,11 @@
     "fbjs": "^0.8.16",
     "react": "^16.2.0",
     "react-native": "^0.53.0",
-    "react-native-firebase": "^3.2.7"
+    "react-native-firebase": "^3.2.7",
+    "lodash": "^4.17.4",
+    "mobx": "^3.0.2",
+    "mobx-react": "^4.1.0",
+    "react-native-mobx": "^0.3.1",
+    "react-native-onesignal": "^3.0.0"
   }
 }
