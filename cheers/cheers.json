@@ -33,17 +33,17 @@ letsGoBlueJays = [
     text: '👏🏼',
     time: 200,
     animation: 'pop'
-  }
+  },
   {
     text: '👏🏼',
     time: 100,
     animation: 'pop'
-  }
+  },
   {
     text: '👏🏼',
     time: 100,
     animation: 'pop'
-  }
+  },
   {
     text: '👏🏼',
     time: 100,
