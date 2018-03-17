@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View, TouchableOpacity } from 'react-native'
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import teamColors from './assets/TeamColours'
 
 
 import firebase from 'react-native-firebase'
@@ -37,13 +38,12 @@ export default class App extends React.Component {
     })
   }
 
-  _onSelectTeam () {
+  _onSelectTeam (team, teamName) {
     this.setState({
       isChoosingTeam: false,
-      myTeam: 'toronto-blue-jays',
-      myTeamName: 'Blue Jays',
-      myTeamLogo: './assets/toronto-blue-jays.png'
-
+      myTeam: team,
+      myTeamName: teamName,
+      myTeamLogo: `app/views/assets/${team}.png`
     })
   }
 
@@ -53,12 +53,12 @@ export default class App extends React.Component {
         <View style={styles.container}>
           <Text style={styles.title}>Who Are You Cheering For?</Text>
           <View style={styles.teamImageContainer}>
-            <TouchableOpacity onPress={this._onSelectTeam.bind(this)}>
+            <TouchableOpacity onPress={() => {this._onSelectTeam('toronto-blue-jays', 'Blue Jays')}}>
               <Image style={styles.teamImage} source={require('./assets/toronto-blue-jays.png')} />
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity onPress={this._onSelectTeam.bind(this)}>
+            <TouchableOpacity onPress={() => {this._onSelectTeam('baltimore-orioles', 'Orioles')}}>
               <Image style={styles.teamImage} source={require('./assets/baltimore-orioles.png')} />
             </TouchableOpacity>
           </View>
@@ -77,11 +77,11 @@ export default class App extends React.Component {
             </Button>
           </Left>
           <Body style={{flex: 7}}>
-            <Image style={styles.headerLogo} source={require('./assets/toronto-blue-jays.png')} />
+            <Image style={styles.headerLogo} source={this.state.myTeamName === 'Blue Jays' ? require('./assets/toronto-blue-jays.png') :  require('./assets/baltimore-orioles.png')} />
           </Body>
           <Right />
         </Header>
-        <View style={styles.container}>
+        <View style={[styles.cheerContainer, { backgroundColor: teamColors[`${this.state.myTeam}`] }]} >
           { this.cheers.forEach((cheer) => {
               const cheerText = cheer.value
               return (
@@ -102,7 +102,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+  },
+  cheerContainer: {
+    height: '100%',
   },
   teamImage: {
     width: 200,
