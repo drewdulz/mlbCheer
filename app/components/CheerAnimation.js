@@ -6,75 +6,86 @@ class CheerAnimation extends React.Component {
     super();
     this.state = {
       currentText: '',
-      cheerData: [
-        {
-          text: 'Lets',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: 'Go',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: 'Blue',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: 'Jays',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: '👏🏼',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: '👏🏼👏🏼',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: '👏🏼👏🏼👏🏼',
-          time: 500,
-          animation: 'pop'
-        },
-        {
-          text: '👏🏼👏🏼👏🏼👏🏼',
-          time: 250,
-          animation: 'pop'
-        },
-        {
-          text: '👏🏼👏🏼👏🏼👏🏼👏🏼',
-          time: 250,
-          animation: 'pop'
-        },
-      ]
+      cheerData: [],
+      //   {
+      //     text: 'Lets',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: 'Go',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: 'Blue',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: 'Jays',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: '👏🏼',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: '👏🏼👏🏼',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: '👏🏼👏🏼👏🏼',
+      //     time: 500,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: '👏🏼👏🏼👏🏼👏🏼',
+      //     time: 250,
+      //     animation: 'pop'
+      //   },
+      //   {
+      //     text: '👏🏼👏🏼👏🏼👏🏼👏🏼',
+      //     time: 250,
+      //     animation: 'pop'
+      //   },
+      // ]
     }
   }
 
   index = 0;
 
   animate = () => {
+    console.log('cheerDa:',this.props.cheerData);
     setTimeout(() => {
       this.setState({
-        currentText:this.state.cheerData[this.index].text,
+        currentText: this.props.cheerData[this.index].text,
       });
       this.index++;
-      if (this.index < this.state.cheerData.length) {
+      if (this.index < this.props.cheerData.length) {
         this.animate();
       } else {
         this.index = 0;
         this.animate();
       }
-    }, this.state.cheerData[this.index].time)
+    }, this.props.cheerData[this.index].time)
   }
 
   componentDidMount() {
-    this.animate();
+    if (this.props.cheerData.length > 0) {
+      this.animate();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.cheerData.length > 0) {
+      this.setState({ cheerData: nextProps.cheerData }, () => { this.animate(); });
+      console.log('nextProps: ', nextProps.cheerData);
+      // this.animate();
+    }
   }
 
 
@@ -83,7 +94,7 @@ class CheerAnimation extends React.Component {
 
     return (
       <View style={styles.fullScreenText}>
-        <Text style={{fontSize:70, color:'white'}}>{this.state.currentText}</Text>
+        <Text style={{fontSize:70, color:'white', marginTop: -150}}>{this.state.currentText}</Text>
       </View>
     );
   }
@@ -101,7 +112,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#134A8E'
   },
   textStyle: {
+    marginTop: -50,
     fontSize: 55,
+
   },
 })
 

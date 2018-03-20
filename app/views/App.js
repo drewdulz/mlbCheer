@@ -11,9 +11,9 @@ export default class App extends React.Component {
   constructor () {
     super()
     this.cheersRef = firebase.database().ref('cheers')
-    this.cheers = []
     this.state = {
-      isChoosingTeam: true
+      isChoosingTeam: true,
+      cheers: []
     }
   }
 
@@ -23,17 +23,14 @@ export default class App extends React.Component {
 
   listenForCheers (cheersRef) {
     cheersRef.on('value', (dbSnapshot) => {
-      const cheers = []
+      const dbCheers = dbSnapshot.val();
 
-      dbSnapshot.forEach((cheer) => {
-        this.cheers.push({
-          value: cheer.val()
+      if (dbCheers) {
+        const parsedCheers = JSON.parse(dbCheers.cheer);
+        this.setState({
+          cheers: parsedCheers,
         })
-      })
-
-      this.setState({
-        cheers: cheers
-      })
+      }
     }, (errorObj) => {
       console.log(`Error occured for ${errorObj.code}`)
     })
@@ -83,7 +80,7 @@ export default class App extends React.Component {
           <Right />
         </Header>
         <View style={[styles.cheerContainer, { backgroundColor: teamColors[`${this.state.myTeam}`] }]} >
-          <CheerAnimation />
+          <CheerAnimation cheerData={this.state.cheers} />
         </View>
       </View>
     )
